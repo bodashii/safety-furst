@@ -1,8 +1,42 @@
+// this will generate a random password based on user input
+
+// grab user input
+
+// pass user input to validate password preferences
+
+// pass password preferences to write password to choose which criteria
+
+// makes arrays for user choices
+
+// pass pick variables and if picked return use arrays in new passPref array
+
+// map through passPref array randomly for length of password
+
+
+
+
+
+// get html refs
+const generateBtn = document.querySelector('#generate');
+const  = document.querySelector('')
+// declare password variables in global scope
+
+
+// display password preferences for user input
+
+// 
+
+
+
+
+
+
+
 // Assignment code here
 
 
 // Get references to the #generate element
-var generateBtn = document.querySelector("#generate");
+
 
 // Write password to the #password input
 function writePassword() {
@@ -37,9 +71,112 @@ for (i = 0; i < passwordLength; i++){
 //   return lowerChar;
 // }
 
-let char = String.fromCharCode(100, 99, 111, 100, 101);
+const pickLower = true;
+const pickUpper = true;
+const pickNumber = true;
+const pickSymbol = true;
 
+function generatePassword() {
+  if(passwordLength <= 7 || passwordLength >= 129) {
+    window.alert('Please choose a number between 8 and 128!');
+    return;
+  } else {
+    // open modal for passPref
+    
+    // accept user input 
+    // event handler for criteria capture
+    // 
+  }
+  // passPref();
+}
+
+let char = String.fromCharCode(100, 99, 111, 100, 101);
+const passCrit = [];
 console.log(char);
+
+// validate user input
+function check(pickLower, pickUpper, pickNumber, pickSymbol){
+  const passCrit = [];
+  const value = {
+    pickLower: true,
+    pickUpper: true,
+    pickNumber: true,
+    pickSymbol: true
+  }
+
+  // const useLower = arrayCharacters(97, 122);
+  // const useUpper = arrayCharacters(65, 90);
+  // const useNumber = numbers(48, 57);
+  // const useSymbol = arrayCharacters(33, 47).concat(
+  //   arrayCharacters(58, 64).concat(
+  //     arrayCharacters(91, 96).concat(
+  //       arrayCharacters(123, 126)
+  //     )
+  //   )
+  // )
+function passPref() {
+  let passCrit = [];
+  switch(value){
+    case pickLower:
+      value = true,
+      // passCrit.push(useLower);
+      passCrit.concat(passArray(91, 122));
+    case pickUpper:
+      // passCrit.push(useUpper);
+      // console.log(useUpper.array);
+      passCrit.concat(passArray(65, 90));
+    case pickNumber:
+      // passCrit.push(useNumber);
+      passCrit.concat(passArray(48, 57));
+    case pickSymbol:
+      // passCrit.push(useSymbol);
+      passCrit.concat(passArray(33, 47).concat(
+        passArray(58, 64).concat(
+          passArray(91, 96).concat(
+            passArray(123, 126)
+          )
+          
+        )
+      ))
+      console.log(passCrit);
+    default:
+      window.alert('Please pick at least one preference.');
+      return
+  }
+}
+
+  const passArray = (high, low) => {
+    let array = []
+    for (i = low; i <= high; i++){
+      return array
+    }
+  }
+
+  function arrayCharacters(high, low) {
+    let array = []
+    for(i = low; i <= high; i++){
+      return array
+    }
+  }
+}
+  
+  // if(pickLower==true){
+  //   passCrit.push(useLower);
+  // }
+  //   // close modal and generate password
+  // if(pickUpper==true){
+  //   passCrit.push(useUpper);
+  // }
+
+  // if(pickNumber == true){
+  //   passCrit.push(useNumber);
+  // }
+
+  // if(pickSymbol == true){
+  //   passCrit.push(useSymbol);
+  // }
+
+
 
 // defines arrays to hold characters
 const lowerArray = [];
@@ -47,7 +184,8 @@ const upperArray = [];
 const numberArray = [];
 const symbolArray = [];
 
-// defines
+
+// defines function and parameters storing characters based on type
 lower = lowerCharacters(97, 122)
 upper = upperCharacters(65, 90)
 number = numbers(48, 57)
@@ -86,13 +224,19 @@ function symbols(low, high) {
   }
   return symbolArray;
 }
-
 // display array of characters lower upper number symbol
-console.log(lower);
-console.log(upper);
-console.log(number);
-console.log(symbol);
+
+console.log(passCrit);
+function passPref(){
+  const char = check();
+  for(i = 0; i <= passwordLength; i++){
+
+  }
+}
+
+
 // console.log(lowerChar);
+
 
 // Makes array for each character type
 // uppercase array
@@ -123,6 +267,8 @@ console.log(symbol);
   // empty array for chosen criteria
   // const passPref = [];
 // }
+
+check();
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
