@@ -8,28 +8,40 @@ function writePassword() {
 }
 
 function generatePassword() {
-  let passPref = getPref();
+  const passLength = getLength();
+  const passPref = getPref();
 
+  console.log(passLength);
+  console.log(passPref);
+}
+
+function getLength() {
+  let passwordLength = Number(window.prompt("Choose how many characters for your password? (8-128)", "12"));
+  if( passwordLength <= 7 || passwordLength >= 129) {
+    window.alert("Please choose a number between 8 and 128");
+    return
+  }
+  return passwordLength;
 }
 
 function getPref() {
+  
   const pref = {
     pickLower: "",
     pickUpper: "",
     pickNumber: "",
     pickSymbol: ""
   }
+
   pref.pickLower = window.confirm("Include lowercase characters?");
-  console.log(pref.pickLower);
 
   pref.pickUpper = window.confirm("Include uppercase characters?");
-  console.log(pref.pickUpper);
 
   pref.pickNumber = window.confirm("Include numbers?");
-  console.log(pref.pickNumber);
 
-  pref.pickSymbols = window.confirm("Include Symbols");
-  console.log(pref.pickSymbols);
+  pref.pickSymbol = window.confirm("Include Symbols");
+  
+  return pref;
 }
 // this will generate a random password based on user input
 
