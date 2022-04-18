@@ -1,5 +1,6 @@
 const generateBtn = document.querySelector('#generate');
 const passForm = {
+  length: '',
   lowercase: false,
   uppercase: false,
   numeral: false,
@@ -10,37 +11,28 @@ const chars = [
   "abcdefghijklmnopqstuvwxyz",
   "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
   "0123456789",
-  ` !"#$%&'()*+,-./:;<=>?@[]\^_\u0060{|}~`
+  ` !"#$%&'()*+,-./:;<=>?@[\]^_\u0060{|}~`
 ];
 
-let passwordLength;
+// splits chars string to iterate over in for loop
+
+const lower = chars[0].split('');
+const upper = chars[1].split('');
+const num = chars[2].split('');
+const sym = chars[3].split('');
+
+const charArray = [lower, upper, num, sym];
+
 // collects password length
+
 function passLength() {
-  let passwordLength = window.prompt(
-    "Pick a password length, 8 - 128."
-  );
-  if (passwordLength < 8 || passwordLength > 128) {
-    window.alert("try again...")
-    getLength()
+  passForm.length = window.prompt(
+    "Pick a password length, 8 - 128.");
+  while (
+    isNaN(passForm.length) || passForm.length < 8 || passForm.length > 128) {
+    passLength();
   }
-  
 }
-
-
-
-// collects user input
-function generatePassword() {
-  passLength();
-  passCrit();
-  console.log(passwordLength);
-  console.log(passForm);
-  var password = writePassword();
-
-  var passwordText = document.querySelector('#password');
-
-  passwordText.value = password;
-}
-
 
 // user picks password criteria
 function passCrit() {
@@ -56,7 +48,34 @@ function passCrit() {
   passForm.symbol = window.confirm(
     "Include symbols?"
   )
+
+  while(
+    !passForm.lowercase && !passForm.uppercase && !passForm.numeral &&
+      !passForm.symbol
+  ) {
+    window.alert(
+      "Select at least one character type."
+    );
+    passCrit();
+  }
 }
+
+
+// collects user input
+function generatePassword() {
+
+  passLength();
+  passCrit();
+  var password = writePassword();
+
+  var passwordText = document.querySelector('#password');
+
+  passwordText.value = password;
+}
+
+
+
+
 // writes the password
 function writePassword() {
   passwordCriteria();
@@ -65,12 +84,13 @@ function writePassword() {
 // verifies user input and adds to new array
 function passwordCriteria() {
   crit = [];
-  let passCrit = Object.values(passForm);
+  let passCriteria = Object.values(passForm);
+  passCriteria.shift();
 
   // loop passes user input
-  for (let i = 0; i < chars.length; i++){
-    if (passCrit[i]) {
-      crit += chars[i];
+  for (let i = 0; i < passCriteria.length; i++){
+    if (passCriteria[i] === true) {
+      crit += charArray[i];
     }
   }
   console.log(crit);
@@ -80,144 +100,11 @@ function passwordCriteria() {
 function randomChar(){
   pass= '';
 
-  for (let i = 0; i < passCrit.length; i++) {
-    pass += char.charAt(Math.floor(math.random() * crit.length));
+  for (let i = 0; i < passForm.length; i++) {
+    pass += crit.charAt(Math.floor(Math.random() * crit.length));
   }
-  console.log(pass);
 }
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", generatePassword);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const generateBtn = document.querySelector('#generate');
-
-// const passCrit = [];
-
-// function writePassword() {
-//   let password = generatePassword();
-//   let passwordText = document.querySelector('#password');
-
-//   passwordText.value = password;
-// }
-
-// function generatePassword() {
-  
-//   passPref();
-  
-
-// }
-
-
-
-// function passPref() {
-//   const passwordLength = window.prompt(
-//     "Please choose a password length between 8 - 128 characters.")
-//   const critArray = {
-//     useLowerChar : '',
-//     useUpperChar : '',
-//     useNumber : '',
-//     useSymbol : ''
-//   }
-
-//   if (passwordLength < 8 || passwordLength > 128){
-//     window.alert("Sorry not a valid entry.")
-//   }else{
-//     critArray.useLowerChar = window.confirm("Include lowercase?");
-//     critArray.useUpperChar = window.confirm("Include uppercase?");
-//     critArray.useNumber = window.confirm("Include numbers?");
-//     critArray.useSymbol = window.confirm("Include symbols?");
-//   }
-//   passCrit
-//   function passCrit() {
-//     if(critArray.useLowerChar && critArray.useUpperChar &&
-//       critArray.useNumber && critArray.useSymbol === false) {
-//         window.alert("Please pick at least one character type.")
-//       }
-//       for (let i = 0; i < critArray[i]; i++){
-//         console.log(critArray);
-//       }
-  
-//     console.log(passPref);
-  
-//     if(critArray.useLowerChar === true){
-//       randomString.map(char.lower)
-//     }
-//     if(critArray.useUpperChar === true){
-//       randomString.join(map(char.upper))
-//     }
-//     if(critArray.useNumber === true){å
-//     }
-//     if(critArray.useSymbol === true){
-//       randomString.join(map(char.symbol))
-//     }
-//     console.log(randomString)
-
-//   }
-// }
-
-
-  
-
-//   let criteria = [];
-//   let passCritObject = Object.values(critArray);
-
-//   for (let i = 0; i < char.length; i++){
-//     if(passCrit[i]){
-//       criteria += char.property[i];
-//     }
-//   }
-//   console.log(passwordLength);
-//   console.log(char);
-//   console.log(passCrit);
-//   console.log(criteria);
-//   console.log(randomString);
-//   // randomChar();
-
-
-
-function arrayCharacters(low, high) {
-  let array = []
-  for(let i = low; i <= high; i++){
-    array.push(String.fromCharCode(i));
-  }
-  return array
-}
-
-
-
-// // function randomChar() {
-// //   randomPassword = "";
-// //   console.log("we made it to the random string character generator");
-// //   for (let i = 0; i < critChar; i++) {
-// //     randomPassword += critChar.charAt(Math.floor(Math.random() * critChar.length))
-// //   }
-// //   console.log(randomPassword);
-// // }
-
-// // Add event listener to generate button
-// generateBtn.addEventListener("click", generatePassword);
-
-// // asdfkjl.map(element ) => {
-
-// // }
