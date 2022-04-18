@@ -6,6 +6,25 @@ const passForm = {
   symbol: false
 }
 
+const char = {
+  lower : arrayCharacters(97, 122),
+  upper : arrayCharacters(65, 90),
+  numeral : arrayCharacters(48, 57),
+  symbol : 
+    arrayCharacters(33, 47)
+      .concat(arrayCharacters(58, 64))
+        .concat(arrayCharacters(91,96))
+          .concat(arrayCharacters(123, 126))
+}
+
+function arrayCharacters(low, high) {
+  let array = []
+  for(let i = low; i <= high; i++){
+    array.push(String.fromCharCode(i));
+  }
+  return array
+}
+
 let passwordLength;
 // collects password length
 function passLength() {
@@ -43,7 +62,7 @@ function passCrit() {
   passForm.uppercase = window.confirm(
     "Include uppercase?"
   )
-  passForm.number = window.confirm(
+  passForm.numeral = window.confirm(
     "Include numbers?"
   )
   passForm.symbol = window.confirm(
@@ -57,6 +76,21 @@ function writePassword() {
 }
 // verifies user input and adds to new array
 function passwordCriteria() {
+  crit = [];
+  let passCrit = Object.values(passForm);
+  console.log(passCrit);
+
+  // loop passes user input
+  for (let i = 0; i < char.props([i]); i++){
+    if (passCrit[i]) {
+      crit += char.property([i]);
+    }
+  }
+  console.log(crit);
+  randomChar();
+}
+// adds random chars based on user input
+function randomChar(){
 
 }
 
@@ -168,24 +202,15 @@ generateBtn.addEventListener("click", generatePassword);
 //   console.log(randomString);
 //   // randomChar();
 
-// const char = {
-//   lower : arrayCharacters(97, 122),
-//   upper : arrayCharacters(65, 90),
-//   number : arrayCharacters(48, 57),
-//   symbol : 
-//     arrayCharacters(33, 47)
-//       .concat(arrayCharacters(58, 64))
-//         .concat(arrayCharacters(91,96))
-//           .concat(arrayCharacters(123, 126))
-// }
 
-// function arrayCharacters(low, high) {
-//   let array = []
-//   for(let i = low; i <= high; i++){
-//     array.push(String.fromCharCode(i));
-//   }
-//   return array
-// }
+
+function arrayCharacters(low, high) {
+  let array = []
+  for(let i = low; i <= high; i++){
+    array.push(String.fromCharCode(i));
+  }
+  return array
+}
 
 
 
