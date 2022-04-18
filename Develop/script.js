@@ -6,24 +6,12 @@ const passForm = {
   symbol: false
 }
 
-const char = {
-  lower : arrayCharacters(97, 122),
-  upper : arrayCharacters(65, 90),
-  numeral : arrayCharacters(48, 57),
-  symbol : 
-    arrayCharacters(33, 47)
-      .concat(arrayCharacters(58, 64))
-        .concat(arrayCharacters(91,96))
-          .concat(arrayCharacters(123, 126))
-}
-
-function arrayCharacters(low, high) {
-  let array = []
-  for(let i = low; i <= high; i++){
-    array.push(String.fromCharCode(i));
-  }
-  return array
-}
+const chars = [
+  "abcdefghijklmnopqstuvwxyz",
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  "0123456789",
+  ` !"#$%&'()*+,-./:;<=>?@[]\^_\u0060{|}~`
+];
 
 let passwordLength;
 // collects password length
@@ -78,12 +66,11 @@ function writePassword() {
 function passwordCriteria() {
   crit = [];
   let passCrit = Object.values(passForm);
-  console.log(passCrit);
 
   // loop passes user input
-  for (let i = 0; i < char.props([i]); i++){
+  for (let i = 0; i < chars.length; i++){
     if (passCrit[i]) {
-      crit += char.property([i]);
+      crit += chars[i];
     }
   }
   console.log(crit);
@@ -91,7 +78,12 @@ function passwordCriteria() {
 }
 // adds random chars based on user input
 function randomChar(){
+  pass= '';
 
+  for (let i = 0; i < passCrit.length; i++) {
+    pass += char.charAt(Math.floor(math.random() * crit.length));
+  }
+  console.log(pass);
 }
 
 // Add event listener to generate button
