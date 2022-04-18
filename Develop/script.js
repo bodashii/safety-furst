@@ -7,7 +7,7 @@ const passForm = {
 }
 
 let passwordLength;
-
+// collects password length
 function passLength() {
   let passwordLength = window.prompt(
     "Pick a password length, 8 - 128."
@@ -21,7 +21,7 @@ function passLength() {
 
 
 
-
+// collects user input
 function generatePassword() {
   passLength();
   passCrit();
@@ -35,7 +35,7 @@ function generatePassword() {
 }
 
 
-
+// user picks password criteria
 function passCrit() {
   passForm.lowercase = window.confirm(
     "Include lowercase?"
@@ -49,6 +49,15 @@ function passCrit() {
   passForm.symbol = window.confirm(
     "Include symbols?"
   )
+}
+// writes the password
+function writePassword() {
+  passwordCriteria();
+  return pass;
+}
+// verifies user input and adds to new array
+function passwordCriteria() {
+
 }
 
 // Add event listener to generate button
